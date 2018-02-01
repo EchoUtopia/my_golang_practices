@@ -101,7 +101,7 @@ func count_sort(array []int) {
 		count_arr[i] = count_arr[i] + count_arr[i-1]
 	}
 	sorted := make([]int, arr_len)
-	for i := 0; i < arr_len; i++ {
+	for i := range array {
 		count_arr[array[i]]--
 		sorted[count_arr[array[i]]] = array[i]
 	}
