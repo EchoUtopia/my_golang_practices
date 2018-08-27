@@ -50,3 +50,10 @@ func main() {
 	c.AddHandler(handler)
 	c.Next()
 }
+
+//output:
+//middleware1
+//middleware2 pre
+//handler
+//middleware3
+//middleware2 post
