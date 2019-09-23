@@ -54,6 +54,35 @@ func quick_sort(array []int, start, end int) error {
 	return nil
 }
 
+// 归并排序
+func mergeSort(arr []int) []int {
+    if len(arr) < 2 {
+        return arr
+    }
+    m := len(arr)/ 2
+    return mergeTwo(mergeSort(arr[:m]), mergeSort(arr[m:]))
+}
+
+func mergeTwo(left, right []int) []int{
+    out := make([]int, 0, len(left) + len(right))
+    li, ri := 0, 0
+    for li < len(left) && ri < len(right) {
+        if left[li] < right[ri] {
+            out = append(out, left[li])
+            li ++
+        }else {
+            out = append(out, right[ri])
+            ri ++
+        }
+    }
+    if li < len(left){
+        out = append(out, left[li:]...)
+    }else if ri < len(right) {
+        out = append(out, right[ri:]...)
+    }
+    return out
+}
+
 //调整堆为最大堆
 func adjust_heap(array []int, pos, length int) {
 	for i := pos*2 + 1; i < length; i = 2*pos + 1 { //交换了子节点和父节点后可能会影响下面的子堆，所以还要去调整子堆
