@@ -1,7 +1,7 @@
 package main
 
 import (
-	"demo.com/examples/antlr/parser"
+	"github.com/EchoUtopia/my_golang_practices/expression_evaluator/parser"
 	"flag"
 	"fmt"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
@@ -152,7 +152,7 @@ func main() {
 }
 
 func parse(){
-	is := antlr.NewInputStream("3*-a*2 >= -10 && !b2")
+	is := antlr.NewInputStream("3*-a*2 >=s -10 && !b")
 
 	// Create the Lexer
 	lexer := parser.NewExpressionLexer(is)
@@ -165,11 +165,11 @@ func parse(){
 	var listener = expressionListener{
 		parameters: map[string]interface{}{
 			`a`: *number,
-			`b2`: *boolean,
+			`b`: *boolean,
 		},
 	}
 	antlr.ParseTreeWalkerDefault.Walk(&listener, p.Start())
-	//fmt.Println(listener.pop())
+	fmt.Println(listener.pop())
 }
 
 func parseWithCache(ctx parser.IStartContext){
